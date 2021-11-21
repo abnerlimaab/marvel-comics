@@ -1,0 +1,26 @@
+.cabecalho {
+    background-color: var(--red);
+    height: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: whitesmoke;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.144);
+    box-sizing: border-box;
+}
+
+.cabecalho__divisao {
+    display: flex;
+    align-items: center;
+}
+
+.cabecalho__ico {
+    height: 25px;
+    width: auto;
+    margin: 25px;
+}
+
+.cabecalho__titulo {
+    font-size: xx-large;
+    margin-right: 25px;
+}

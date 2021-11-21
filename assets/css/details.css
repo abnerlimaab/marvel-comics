@@ -1,0 +1,40 @@
+.details {
+    height: 40%;
+    width: fit-content;
+    color: whitesmoke;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    margin: 20px;
+    padding: 20px;
+}
+
+.details__img {
+    height: 100%;
+    margin: 30px;
+}
+
+.details__title {
+    font-size: xx-large;
+    padding-top: 20px;
+    font-weight: bold;
+    margin: 10px;
+}
+
+.details__price {
+    background-color: rgb(26, 136, 26);
+    font-size: x-large;
+    margin: 10px;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+}
+
+.details__button {
+    margin-left: 10px;
+}
+
+.details__text {
+    font-size: larger;
+    margin: 10px;
+}

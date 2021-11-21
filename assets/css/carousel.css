@@ -1,0 +1,48 @@
+.carousel {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    height: 40%;
+    background-color: #aaaaaaaa;
+}
+
+.carousel__button {
+    height: 100%;
+    width: 5%;
+    border: none;
+    z-index: 10;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #aaaaaaaa;
+}
+
+.carousel__button__back {
+    background-image: url(../img/button--back.png);
+}
+
+.carousel__button__next {
+    background-image: url(../img/button--next.png);
+}
+
+.carousel__list-comic {
+    position: relative;
+    width: 80%;
+    height: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.carousel_comic {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.carousel_comic-image {
+    height: 100%;
+    margin: 10px;
+}

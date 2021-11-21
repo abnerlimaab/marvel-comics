@@ -1,0 +1,128 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/cabecalho.css">
+    <link rel="stylesheet" href="assets/css/comic.css">
+    <link rel="stylesheet" href="assets/css/carousel.css">
+    <link rel="stylesheet" href="assets/css/details.css">
+</head>
+
+<body class="body">
+    <header class="cabecalho container">
+        <div class="cabecalho__divisao">
+            <img src="assets/img/marvel.png" alt="Logo Marvel" class="cabecalho__ico">
+            <h1 class="cabecalho__titulo">COMICS</h1>
+        </div>
+    </header>
+    <article class="carousel">
+    <button class="carousel__button carousel__button__back" aria-label="Back Button"></button>
+    <ul id='comic' class="carousel__list-comic">
+        <a href="#" class="carousel__comic">
+        </a>
+    </ul>
+    <button class="carousel__button carousel__button__next" aria-label="Next Button"></button>
+    </article>
+    </div>
+    <div id="details"></div>
+</body>
+<script>
+    apiAuthentication()
+        .then(response => {
+            return response.json()
+        })
+        .then(jsonComics => {
+            console.log(jsonComics)
+            createDivDetails(jsonComics.data.results[3])
+            listComic(jsonComics)
+        })
+
+    function apiAuthentication() {
+        const apiKey = '3ad3619472b0fcafd502a6ae8180b08b'
+        const md5 = 'ef748f69143bdb7cdb55fda596872dd4'
+
+        return fetch(`https://gateway.marvel.com:443/v1/public/comics?ts=3&apikey=${apiKey}&hash=${md5}`)
+    }
+
+    function listComic(jsonComics) {
+
+        const ulComic = document.querySelector('#comic')
+
+        jsonComics.data.results.forEach(comic => {
+            const srcImage = comic.thumbnail.path + '.' + comic.thumbnail.extension
+            const titleComic = comic.title
+
+            createDivComic(srcImage, titleComic, ulComic)
+        })
+    }
+
+    function createDivDetails(comic) {
+        const divDetails = document.querySelector('#details')
+        const divFather = document.createElement('div')
+        const divImage = document.createElement('div')
+        const divChild = document.createElement('div')
+        const img = document.createElement('img')
+        const divTitleName = document.createElement('div')
+        const titleName = document.createElement('text')
+        const divPrice = document.createElement('div')
+        const price = document.createElement('text')
+        const divDetailComic = document.createElement('div')
+        const detailsComic = document.createElement('text')
+        const divButtonComprar = document.createElement('div')
+        const btComprar = document.createElement('button')
+
+        img.src = comic.thumbnail.path + '.' + comic.thumbnail.extension
+        titleName.textContent = comic.title
+        price.textContent = '$ ' + comic.prices[0].price
+        detailsComic.textContent = comic.textObjects[0].text
+        btComprar.textContent = 'COMPRAR'
+
+        divTitleName.appendChild(titleName)
+        divPrice.appendChild(price)
+        divButtonComprar.appendChild(btComprar)
+        divPrice.appendChild(divButtonComprar)
+        divDetailComic.appendChild(detailsComic)
+        divImage.appendChild(img)
+        divChild.appendChild(divTitleName)
+        divChild.appendChild(divPrice)
+        divChild.appendChild(divDetailComic)
+        divFather.appendChild(divImage)
+        divFather.appendChild(divChild)
+        divDetails.appendChild(divFather)
+        
+        divFather.classList.add('details')
+        img.classList.add('details__img')
+        divTitleName.classList.add('details__title')
+        divPrice.classList.add('details__price')
+        divDetailComic.classList.add('details__text')
+        divButtonComprar.classList.add('details__button')
+    }
+
+    function createDivComic(srcImage, title, ul) {
+        const divCover = document.createElement('div')
+        const il = document.createElement('il')
+
+        if (!comicValid(srcImage)) {
+            return
+        }
+
+        const img = document.createElement('img')
+
+        img.src = srcImage
+
+        divCover.appendChild(img)
+        il.append(divCover)
+        ul.append(il)
+
+        img.classList.add('carousel_comic-image')
+        il.classList.add('carousel__comic')
+        divCover.classList.add('carousel__comic')
+    }
+
+    function comicValid(srcImage) {
+        return srcImage.indexOf('image_not_available') == -1
+    }
+
+</script>
+
+</html>
